@@ -2,11 +2,13 @@
 <widget id="com.phonegap.helloworld" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>PermanentStore_v1</name>
     <description>
-        A blank PhoneGap app.
+        Storage
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="gs@gs.com" href="http://gs.com">
+        gs
     </author>
+    <content src="index.html" />
+    <access origin="*" />
 
     <plugin name="cordova-plugin-battery-status"      source="npm" spec="~1.2.4" />
     <plugin name="cordova-plugin-camera"              source="npm" spec="~2.4.1" />
@@ -20,9 +22,7 @@
     <plugin name="cordova-plugin-network-information" source="npm" spec="~1.3.3" />
     <plugin name="cordova-plugin-vibration"           source="npm" spec="~2.1.5" />
     <!--plugin name="cordova-sqlite-storage"             source="npm" spec="~3.2.0" /-->
-    <plugin name="cordova-plugin-dialogs" spec="~2.0.1" />
-    <plugin name="cordova-sqlite-storage" spec="~2.3.3" />
+    <plugin name="cordova-sqlite-storage" 	      source="npm"spec="~2.3.3" />
 
-    <content src="index.html" />
-    <access origin="*" />
+
 </widget>
