@@ -8,7 +8,6 @@
         gs
     </author>
     <content src="index.html" />
-    <access origin="*" />
 
     <plugin name="cordova-plugin-battery-status"      source="npm" spec="~1.2.4" />
     <plugin name="cordova-plugin-camera"              source="npm" spec="~2.4.1" />
