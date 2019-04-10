@@ -30,7 +30,7 @@
 
     	
 	function onDeviceReady(){
-	  alert("odready");
+	  alert("on device ready");
 	  db=window.openDatabase("Database", "1.0", "Cordova Demo", 2*1024*1024);
 	  db.transaction(createDB, errorCB, successCB);
 	}
