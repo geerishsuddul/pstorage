@@ -8,11 +8,30 @@
    <script src="js/jquery.mobile-1.4.5.js"></script>
 
    <script type="text/javascript">
-	document.addEventListener("deviceready", onDeviceReady, false);
-	var db;
+    var db=null;
+
+    $(document).ready(function() {
+    // are we running in native app or in a browser?
+    window.isphone = false;
+    if(document.URL.indexOf("http://") === -1 
+        && document.URL.indexOf("https://") === -1) {
+        window.isphone = true;
+    }
+
+    if( window.isphone ) {
+	alert("Phone");
+        document.addEventListener("deviceready", onDeviceReady, false);
+    } else {
+	alert("browser");
+        onDeviceReady();
+	
+    }
+  });
+
+    	
 	function onDeviceReady(){
-	  alert("on device ready");
-	  db=window.openDatabase("DataStore", "1.0", "Cordova Demo", 2*1024*1024);
+	  alert("odready");
+	  db=window.openDatabase("Database", "1.0", "Cordova Demo", 2*1024*1024);
 	  db.transaction(createDB, errorCB, successCB);
 	}
 	function createDB(tx){
@@ -27,6 +46,10 @@
 	function successCB(err){
 	  alert("Database & Table Created");
 	}
+  
+
+
+	
 
 	function insertDB(tx){
     	  var title="Software Engineering";
@@ -54,8 +77,32 @@
 
 
 	function submitForm(){
-	   db.transaction(insertDB, errorCB);
-	   $.mobile.changePage("#pagetwo", {reverse:false, transition:"slide"});
+	 //alert("execute submit form!");
+	   
+	db.transaction(insertDB, errorCB);
+
+	function insertDB(tx){
+    	  var title="Software Engineering";
+	  var author="John Doe";
+          var sql='INSERT INTO book (title, author) VALUES (?,?)';
+	  tx.executeSql(sql,[title,author], successQueryDB, errorCB);
+	}
+
+ 	function successQueryDB(tx){
+	  alert("Insert Executed");
+	  tx.executeSql('SELECT * FROM book', [], renderList, errorCB)
+	}
+
+	function renderList(tx, results){
+	  var htmlString = '';
+	  var len = results.rows.length;
+	  for(var i=0; i<len;i++){
+	    htmlString+='<li>'+results.rows.item(i).title+'<br>'+results.rows.item(i).author+'</li>';  
+          }
+	  $('#resultList').html(htmlString);
+	  $('#resultList').listview('refresh');
+	}
+        $.mobile.changePage("#pagetwo", {reverse:false, transition:"slide"});
 
 	   
 	   return false;
